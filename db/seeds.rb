@@ -10,7 +10,7 @@ puts "Seed : Démarrage :"
 
 print "Users ... "
 User.destroy_all
-10.times do		#cree 10 user avec une ville en reference
+10.times do		
   last_name_faker = Faker::Name.last_name
   yop_email = last_name_faker + "@" + "yopmail.com"
   User.create(
@@ -24,7 +24,7 @@ puts
 
 print "Events ... "
 Event.destroy_all
-10.times do		#cree 10 user avec une ville en reference
+10.times do		
   Event.create(
     start_date: Faker::Date.forward(days: 40),
     duration: [30,45,90,180].sample,
@@ -37,10 +37,10 @@ end
 print "Ok"
 puts 
 
-print "Participations ... "
-Participation.destroy_all
-10.times do		#cree 10 user avec une ville en reference
-  Participation.create(
+print "Attendances ... "
+Attendance.destroy_all
+10.times do		
+  Attendance.create(
     user: User.all.sample,
     event: Event.all.sample,
     stripe_customer_id: "st_id"
