@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-puts "Seed : Démarrage :"
+puts "Seed en cours..."
 
 print "Users ... "
 User.destroy_all
@@ -26,11 +26,12 @@ print "Events ... "
 Event.destroy_all
 10.times do		
   Event.create(
-    start_date: Faker::Date.forward(days: 40),
-    duration: [30,45,90,180].sample,
+    start_date: Faker::Date.backward(days: 40),
+    duration: (5*rand(1..20)),
     title: Faker::Quote.famous_last_words,
-    description: Faker::ChuckNorris.fact,
-    price: (rand(5..9)*[10,100,1000].sample),
+    description: Faker::ChuckNorris.fact*2,
+    price: rand(1..1000),
+    user: User.all.sample,
     location: Faker::Address.city
   )
 end
