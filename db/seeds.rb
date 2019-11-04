@@ -5,3 +5,48 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+puts "Seed : Démarrage :"
+
+print "Users ... "
+User.destroy_all
+10.times do		#cree 10 user avec une ville en reference
+  last_name_faker = Faker::Name.last_name
+  yop_email = last_name_faker + "@" + "yopmail.com"
+  User.create(
+    first_name: Faker::Name.first_name, 
+    last_name: last_name_faker, 
+    description: Faker::Quote.famous_last_words, 
+    email: yop_email)
+end
+print "Ok"
+puts
+
+print "Events ... "
+Event.destroy_all
+10.times do		#cree 10 user avec une ville en reference
+  Event.create(
+    start_date: Faker::Date.forward(days: 40),
+    duration: [30,45,90,180].sample,
+    title: Faker::Quote.famous_last_words,
+    description: Faker::ChuckNorris.fact,
+    price: (rand(5..9)*[10,100,1000].sample),
+    location: Faker::Address.city
+  )
+end
+print "Ok"
+puts 
+
+print "Participations ... "
+Participation.destroy_all
+10.times do		#cree 10 user avec une ville en reference
+  Participation.create(
+    user: User.all.sample,
+    event: Event.all.sample,
+    stripe_customer_id: "st_id"
+  )
+end
+print "Ok"
+puts 
+
+puts "Seed : effectué !"
